@@ -1,9 +1,10 @@
-var gulp =require('gulp');
+var gulp =require('gulp'); //To import gulp and all plug-ins used
 var css =require('gulp-clean-css');
 var html =require('gulp-html-minifier2');
 var js =require('gulp-uglify');
 
-gulp.task('css', function() {
+gulp.task('css', function() { 
+//Instruction to the gulp to perform according to  the tak
 	return gulp.src('css/*.css').pipe(css()).pipe(gulp.dest('dist/css'))
 });
 
