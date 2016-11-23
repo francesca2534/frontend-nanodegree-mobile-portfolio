@@ -488,7 +488,7 @@ var len;
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   //Reduced the number of moving pizzas to 28 with 7 columns and 4 rows
-  var cols = 8;
+  var cols = 7;
   var s = 256;
   for (var i = 0; i < 28; i++) {
     var elem = document.createElement('img');
