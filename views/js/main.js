@@ -353,13 +353,13 @@ var makeRandomPizza = function() {
   return pizza;
 };
 
-// returns a DOM element for each pizza
-//var pizzaElementGenerator = function(i) {
-  //for (var i = 2; i < 100; i++) {
+/*returns a DOM element for each pizza
+var pizzaElementGenerator = function(i) {
+  for (var i = 2; i < 100; i++) {
 
-  //return pizzaContainer;
-//}
-//};
+  return pizzaContainer;
+  }
+};*/
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
@@ -391,14 +391,17 @@ var resizePizzas = function(size) {
     switch(size) {
       case "1":
         newWidth =25;
+        break;
       case "2":
         newWidth =33.33;
+        break;
       case "3":
         newWidth =50;
+        break;
       default:
         console.log("bug in sizeSwitcher");
     }
-    var k = document.querySelectorAll(".randomPizzaContainer"); //Took outside the for loop
+    var k = document.getElementsByClassName("randomPizzaContainer"); //Took outside the for loop
     for (var i = 0; i < k.length; i++) {
       k[i].style.width = newWidth + '%';
     }
@@ -485,7 +488,7 @@ var len;
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   //Reduced the number of moving pizzas to 28 with 7 columns and 4 rows
-  var cols = 7;
+  var cols = 8;
   var s = 256;
   for (var i = 0; i < 28; i++) {
     var elem = document.createElement('img');
@@ -511,9 +514,14 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
   var dbs = document.body.scrollTop/1250; //Took out from for loop
+  var phase =[];
+  for (var i = 0; i < 5; i++) {
+    phase.push(Math.sin(dbs+i))
+  }
   for (var i = 0; i < len; i++) {
-    var phase = Math.sin(dbs + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
+    //var left = items[i].basicLeft + 100 * phase[i%5] + 'px';
+    //items[i].translateX(10px, 0px)
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
